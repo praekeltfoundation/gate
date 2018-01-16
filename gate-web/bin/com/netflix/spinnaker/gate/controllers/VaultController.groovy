@@ -17,7 +17,6 @@
 package com.netflix.spinnaker.gate.controllers
 
 import com.netflix.spinnaker.gate.services.internal.VaultService
-import com.netflix.spinnaker.gate.services.internal.ClouddriverServiceSelector
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PathVariable
@@ -34,9 +33,9 @@ class VaultController {
   VaultService vaultService
 
   @ApiOperation(value = "Retrieve a list of roles for a secret backend")
-  @RequestMapping(value = "/{backend}/roles", method = RequestMethod.GET)
+  @RequestMapping(value = "/v1/{backend}/roles", method = RequestMethod.LIST)
   List<Map> roles(@PathVariable String backend,
                   @RequestHeader(value = "X-Vault-Token", required = true) String vaultToken) {
-    vaultService.getRoles(backend)
+    vaultService.getRoles(backend, vaultToken)
   }
 }

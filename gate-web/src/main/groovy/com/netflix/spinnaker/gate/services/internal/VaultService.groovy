@@ -33,4 +33,12 @@ interface VaultService {
   @GET("/v1/{backend}/roles")
   List getRoles(@Path("backend") String backend)
 
+  @Headers("Accept: application/json")
+  @GET("/v1/secret/gatekeeper")
+  List getGatekeeperPolicies()
+
+  @Headers("Accept: application/json")
+  @GET("/v1/secret/gatekeeper")
+  List updateGatekeeperPolicies()
+  
 }

@@ -39,4 +39,18 @@ class VaultController {
                   @RequestHeader(value = "X-Vault-Token", required = true) String vaultToken) {
     vaultService.getRoles(backend)
   }
+
+  @ApiOperation(value = "Retrieve the current Gatekeeper policy.")
+  @RequestMapping(value = "/gatekeeper/policies", method = RequestMethod.GET)
+  List<Map> getGatekeeperPolicies(@PathVariable String backend,
+                  @RequestHeader(value = "X-Vault-Token", required = true) String vaultToken) {
+    vaultService.getGatekeeperPolicies()
+  }
+
+  @ApiOperation(value = "Update the current Gatekeeper policy.")
+  @RequestMapping(value = "/gatekeeper/updatepolicies", method = RequestMethod.POST)
+  List<Map> updateGatekeeperPolicies(@PathVariable String backend,
+                  @RequestHeader(value = "X-Vault-Token", required = true) String vaultToken) {
+    vaultService.updateGatekeeperPolicies()
+  }
 }
