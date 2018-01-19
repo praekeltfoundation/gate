@@ -29,8 +29,7 @@ import retrofit.http.Query
 
 interface GatekeeperService {
 
-  @Headers("Accept: application/json")
   @POST("/policies/reload")
-  Map reloadPolicies()
+  Response reloadPolicies()
   
 }

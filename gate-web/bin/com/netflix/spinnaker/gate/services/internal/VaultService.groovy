@@ -28,6 +28,7 @@ import retrofit.http.PUT
 import retrofit.http.Path
 import retrofit.http.Query
 
+
 interface VaultService {
 
   @Headers("X-Vault-Token: {vaultToken}")
@@ -36,6 +37,11 @@ interface VaultService {
 
   @Headers("X-Vault-Token: {vaultToken}")
   @POST("/v1/secret/gatekeeper")
-  Response updateGatekeeperPolicy(@Header("vaultToken") String vaultToken)
+  //Figure out a way to populate the vaultToken parameter from Gate's internal configs
+  Response updateGatekeeperPolicies(@Header("vaultToken") String vaultToken, @Body Map newPolicies)
+
+  @Headers("X-Vault-Token: {vaultToken}")
+  @GET("/v1/secret/gatekeeper")
+  Map getGatekeeperPolicies(@Header("vaultToken") String vaultToken)
 
 }

@@ -13,6 +13,7 @@ services:
     baseUrl: http://localhost:7002
   vault:
     baseUrl: https://qa-seed-vault.za.p16n.org:8200
+    vaultToken: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   gatekeeper:
     baseUrl: https://qa-seed-vault.za.p16n.org:9201
 # semi-optional services (Everybody except Netflix needs these):
