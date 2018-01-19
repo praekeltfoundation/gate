@@ -12,6 +12,7 @@ services:
   clouddriver:
     baseUrl: http://localhost:7002
   vault:
+    enabled: true
     baseUrl: https://qa-seed-vault.za.p16n.org:8200
     vaultToken: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   gatekeeper:

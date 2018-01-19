@@ -21,24 +21,31 @@ import retrofit.http.Body
 import retrofit.http.DELETE
 import retrofit.http.GET
 import retrofit.http.Headers
+import retrofit.http.Header
 import retrofit.http.PATCH
 import retrofit.http.POST
 import retrofit.http.PUT
 import retrofit.http.Path
 import retrofit.http.Query
 
+
 interface VaultService {
 
-  @Headers("Accept: application/json")
-  @GET("/v1/{backend}/roles")
-  List getRoles(@Path("backend") String backend)
+  @Headers("X-Vault-Token: {vaultToken}")
+  @GET("/sys/acl/policies")
+  List getVaultACLs(@Header("vaultToken") String vaultToken)
 
-  @Headers("Accept: application/json")
-  @GET("/v1/secret/gatekeeper")
-  List getGatekeeperPolicies()
+  @Headers("X-Vault-Token: {vaultToken}")
+  @GET("/v1/{backend}/roles?list=true")
+  List getRoles(@Path("backend") String backend, @Header("vaultToken") String vaultToken)
 
-  @Headers("Accept: application/json")
+  @Headers("X-Vault-Token: {vaultToken}")
+  @POST("/v1/secret/gatekeeper")
+  //Figure out a way to populate the vaultToken parameter from Gate's internal configs
+  Response updateGatekeeperPolicies(@Header("vaultToken") String vaultToken, @Body Map newPolicies)
+
+  @Headers("X-Vault-Token: {vaultToken}")
   @GET("/v1/secret/gatekeeper")
-  List updateGatekeeperPolicies()
-  
+  Map getGatekeeperPolicies(@Header("vaultToken") String vaultToken)
+
 }

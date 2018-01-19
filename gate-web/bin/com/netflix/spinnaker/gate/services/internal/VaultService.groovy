@@ -32,6 +32,10 @@ import retrofit.http.Query
 interface VaultService {
 
   @Headers("X-Vault-Token: {vaultToken}")
+  @LIST("/sys/acl/policies")
+  List getVaultACLs(@Header("vaultToken") String vaultToken)
+
+  @Headers("X-Vault-Token: {vaultToken}")
   @LIST("/v1/{backend}/roles")
   List getRoles(@Path("backend") String backend, @Header("vaultToken") String vaultToken)
 

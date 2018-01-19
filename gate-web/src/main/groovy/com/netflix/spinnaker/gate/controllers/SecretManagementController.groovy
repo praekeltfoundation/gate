@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.Body
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -38,26 +38,26 @@ class SecretManagementController {
   SecretPolicyService secretPolicyService
 
   @ApiOperation(value = "Retrieve a list Vault ACLs for Spinnaker applications")
-  @RequestMapping(value = "/vaultpolicies", method = RequestMethod.LIST)
+  @RequestMapping(value = "/vaultpolicies", method = RequestMethod.GET)
   List<Map> getVaultACLs(@PathVariable String backend) {
     secretManagementService.getVaultACLs()
   }
 
   @ApiOperation(value = "Retrieve a list of roles for a secret backend")
-  @RequestMapping(value = "/{backend}/roles", method = RequestMethod.LIST)
+  @RequestMapping(value = "/{backend}/roles", method = RequestMethod.GET)
   List<Map> getRoles(@PathVariable String backend) {
     secretManagementService.getRoles(backend)
   }
 
   @ApiOperation(value = "Retrieve Gatekeeper policies from Vault")
-  @RequestMapping(value = "/gatekeeper/policies", method = RequestMethod.GET) the
+  @RequestMapping(value = "/gatekeeper/policies", method = RequestMethod.GET)
   List<Map> getGatekeeperPolicies() {
     secretManagementService.getGatekeeperPolicies()
   }
 
   @ApiOperation(value = "Update Gatekeeper policies")
   @RequestMapping(value = "/gatekeeper/policies", method = RequestMethod.POST)
-  List<Map> updateGatekeeperPolicies(@Body Map newPolicies) {
+  List<Map> updateGatekeeperPolicies(@RequestBody Map newPolicies) {
     secretManagementService.updateGatekeeperPolicies(newPolicies)
   }
 
