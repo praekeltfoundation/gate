@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController
 class SecretManagementController {
 
   @Autowired
-  SecretManagementService secretManagementServices
+  SecretManagementService secretManagementService
 
   @Autowired
   SecretPolicyService secretPolicyService
