@@ -15,11 +15,11 @@ class SecretManagementService {
   @Autowired
   VaultService vaultService
 
-  List getVaultACLs(String vaultToken) {
+  Map getVaultACLs(String vaultToken) {
     vaultService.getVaultACLs(vaultToken)
   }
 
-  List getRoles(String backend, String vaultToken) {
+  Map getRoles(String backend, String vaultToken) {
     vaultService.getRoles(backend, vaultToken)
   }
 

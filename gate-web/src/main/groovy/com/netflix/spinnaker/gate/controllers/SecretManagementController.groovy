@@ -53,14 +53,13 @@ class SecretManagementController {
 
   @ApiOperation(value = "Retrieve a list Vault ACLs for Spinnaker applications")
   @RequestMapping(value = "/vaultpolicies", method = RequestMethod.GET)
-  List<Map> getVaultACLs() {
+  Map getVaultACLs() {
     secretManagementService.getVaultACLs(vaultToken)
   }
 
   @ApiOperation(value = "Retrieve a list of roles for a secret backend")
   @RequestMapping(value = "/{backend}/roles", method = RequestMethod.GET)
-  List<Map> getRoles(@PathVariable String backend) {
-    log.error("WOWWEEEEEEEEEEEEEEEEEEEE VAULT TOKEN: " + vaultToken)
+  Map getRoles(@PathVariable String backend) {
      try {
         return secretManagementService.getRoles(backend, vaultToken)
       } catch (RetrofitError e) {
@@ -80,7 +79,7 @@ class SecretManagementController {
 
   @ApiOperation(value = "Update Gatekeeper policies")
   @RequestMapping(value = "/gatekeeper/policies", method = RequestMethod.POST)
-  List<Map> updateGatekeeperPolicies(@RequestBody Map newPolicies) {
+  Map updateGatekeeperPolicies(@RequestBody Map newPolicies) {
     try {
       return secretManagementService.updateGatekeeperPolicies(vaultToken, newPolicies)
     } catch (RetrofitError e) {
@@ -90,7 +89,7 @@ class SecretManagementController {
 
   @ApiOperation(value = "Tell Gatekeeper to refresh its policies from Vault")
   @RequestMapping(value = "/gatekeeper/policies/reload", method = RequestMethod.POST)
-  List<Map> reloadGatekeeperPolicies() {
+  Map reloadGatekeeperPolicies() {
     try {
     return secretPolicyService.reloadPolicies()
     } catch (RetrofitError e) {

@@ -32,14 +32,13 @@ import retrofit.http.Query
 interface VaultService {
 
   @GET("/sys/acl/policies")
-  List getVaultACLs(@Header("X-Vault-Token") String vaultToken)
+  Map getVaultACLs(@Header("X-Vault-Token") String vaultToken)
 
   @GET("/v1/{backend}/roles?list=true")
-  List getRoles(@Path("backend") String backend, @Header("X-Vault-Token") String vaultToken)
+  Map getRoles(@Path("backend") String backend, @Header("X-Vault-Token") String vaultToken)
 
   @POST("/v1/secret/gatekeeper")
-  //Figure out a way to populate the vaultToken parameter from Gate's internal configs
-  Response updateGatekeeperPolicies(@Header("X-Vault-Token") String vaultToken, @Body Map newPolicies)
+  Map updateGatekeeperPolicies(@Header("X-Vault-Token") String vaultToken, @Body Map newPolicies)
 
   @GET("/v1/secret/gatekeeper")
   Map getGatekeeperPolicies(@Header("X-Vault-Token") String vaultToken)
