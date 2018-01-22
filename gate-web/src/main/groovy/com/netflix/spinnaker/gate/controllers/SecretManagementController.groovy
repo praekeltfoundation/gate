@@ -62,19 +62,31 @@ class SecretManagementController {
   @ApiOperation(value = "Retrieve Gatekeeper policies from Vault")
   @RequestMapping(value = "/gatekeeper/policies", method = RequestMethod.GET)
   Map getGatekeeperPolicies() {
-    secretManagementService.getGatekeeperPolicies()
+    try {
+      return secretManagementService.getGatekeeperPolicies()
+    } catch (RetrofitError e) {
+        throw classifyError(e)
+      } 
   }
 
   @ApiOperation(value = "Update Gatekeeper policies")
   @RequestMapping(value = "/gatekeeper/policies", method = RequestMethod.POST)
   List<Map> updateGatekeeperPolicies(@RequestBody Map newPolicies) {
-    secretManagementService.updateGatekeeperPolicies(newPolicies)
+    try {
+      return secretManagementService.updateGatekeeperPolicies(newPolicies)
+    } catch (RetrofitError e) {
+      throw classifyError(e)
+    }
   }
 
   @ApiOperation(value = "Tell Gatekeeper to refresh its policies from Vault")
   @RequestMapping(value = "/gatekeeper/policies/reload", method = RequestMethod.POST)
   List<Map> reloadGatekeeperPolicies() {
-    secretPolicyService.reloadPolicies()
+    try {
+    return secretPolicyService.reloadPolicies()
+    } catch (RetrofitError e) {
+            throw classifyError(e)
+    }
   }
 
 }
