@@ -32,6 +32,7 @@ import groovy.util.logging.Slf4j
 
 import static com.netflix.spinnaker.gate.retrofit.UpstreamBadRequest.classifyError
 
+@Slf4j
 @CompileStatic
 @RestController
 @RequestMapping("/secrets")
@@ -43,17 +44,21 @@ class SecretManagementController {
   @Autowired
   SecretPolicyService secretPolicyService
 
+  @Value('${services.vault.vaultToken}')
+  private static String vaultToken
+
   @ApiOperation(value = "Retrieve a list Vault ACLs for Spinnaker applications")
   @RequestMapping(value = "/vaultpolicies", method = RequestMethod.GET)
-  List<Map> getVaultACLs(@PathVariable String backend) {
-    secretManagementService.getVaultACLs()
+  List<Map> getVaultACLs() {
+    secretManagementService.getVaultACLs(vaultToken)
   }
 
   @ApiOperation(value = "Retrieve a list of roles for a secret backend")
   @RequestMapping(value = "/{backend}/roles", method = RequestMethod.GET)
   List<Map> getRoles(@PathVariable String backend) {
+    log.error("WOWWEEEEEEEEEEEEEEEEEEEE VAULT TOKEN: " + vaultToken)
      try {
-        return secretManagementService.getRoles(backend)
+        return secretManagementService.getRoles(backend, vaultToken)
       } catch (RetrofitError e) {
         throw classifyError(e)
       } 
@@ -63,7 +68,7 @@ class SecretManagementController {
   @RequestMapping(value = "/gatekeeper/policies", method = RequestMethod.GET)
   Map getGatekeeperPolicies() {
     try {
-      return secretManagementService.getGatekeeperPolicies()
+      return secretManagementService.getGatekeeperPolicies(vaultToken)
     } catch (RetrofitError e) {
         throw classifyError(e)
       } 
@@ -73,7 +78,7 @@ class SecretManagementController {
   @RequestMapping(value = "/gatekeeper/policies", method = RequestMethod.POST)
   List<Map> updateGatekeeperPolicies(@RequestBody Map newPolicies) {
     try {
-      return secretManagementService.updateGatekeeperPolicies(newPolicies)
+      return secretManagementService.updateGatekeeperPolicies(vaultToken, newPolicies)
     } catch (RetrofitError e) {
       throw classifyError(e)
     }
