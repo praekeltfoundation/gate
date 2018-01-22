@@ -5,7 +5,9 @@ import com.netflix.spinnaker.gate.services.internal.VaultService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
+import groovy.transform.CompileStatic
 
+@CompileStatic
 @Component
 class SecretManagementService {
 

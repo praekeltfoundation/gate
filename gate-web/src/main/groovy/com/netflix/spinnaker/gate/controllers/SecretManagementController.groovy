@@ -26,7 +26,13 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import groovy.transform.CompileStatic
+import retrofit.RetrofitError
+import groovy.util.logging.Slf4j
 
+import static com.netflix.spinnaker.gate.retrofit.UpstreamBadRequest.classifyError
+
+@CompileStatic
 @RestController
 @RequestMapping("/secrets")
 class SecretManagementController {
@@ -46,12 +52,16 @@ class SecretManagementController {
   @ApiOperation(value = "Retrieve a list of roles for a secret backend")
   @RequestMapping(value = "/{backend}/roles", method = RequestMethod.GET)
   List<Map> getRoles(@PathVariable String backend) {
-    secretManagementService.getRoles(backend)
+     try {
+        return secretManagementService.getRoles(backend)
+      } catch (RetrofitError e) {
+        throw classifyError(e)
+      } 
   }
 
   @ApiOperation(value = "Retrieve Gatekeeper policies from Vault")
   @RequestMapping(value = "/gatekeeper/policies", method = RequestMethod.GET)
-  List<Map> getGatekeeperPolicies() {
+  Map getGatekeeperPolicies() {
     secretManagementService.getGatekeeperPolicies()
   }
 
@@ -64,7 +74,7 @@ class SecretManagementController {
   @ApiOperation(value = "Tell Gatekeeper to refresh its policies from Vault")
   @RequestMapping(value = "/gatekeeper/policies/reload", method = RequestMethod.POST)
   List<Map> reloadGatekeeperPolicies() {
-    secretPolicyService.reloadGatekeeperPolicies()
+    secretPolicyService.reloadPolicies()
   }
 
 }
