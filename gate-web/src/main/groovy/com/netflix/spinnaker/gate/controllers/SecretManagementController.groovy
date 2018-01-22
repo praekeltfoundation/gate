@@ -45,8 +45,11 @@ class SecretManagementController {
   @Autowired
   SecretPolicyService secretPolicyService
 
-  @Value('${services.vault.vaultToken}')
-  private static String vaultToken
+  private final String vaultToken
+
+  SecretManagementController(@Value('${services.vault.vaultToken}') String vaultToken) {
+    this.vaultToken = vaultToken
+  }
 
   @ApiOperation(value = "Retrieve a list Vault ACLs for Spinnaker applications")
   @RequestMapping(value = "/vaultpolicies", method = RequestMethod.GET)
