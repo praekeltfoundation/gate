@@ -25,6 +25,6 @@ interface GatekeeperService {
 
   @Headers("Accept: application/json")
   @POST("/policies/reload")
-  Map reloadPolicies(@Body String requestBody)
+  Map reloadPolicies()
   
 }

@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package com.netflix.spinnaker.gate.services.internal
+package com.netflix.spinnaker.gate.model.discovery
 
-import retrofit.client.Response
-import retrofit.http.Body
-import retrofit.http.Headers
-import retrofit.http.POST
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonRootName
+import groovy.transform.EqualsAndHashCode
 
-interface GatekeeperService {
-
-  @Headers("Accept: application/json")
-  @POST("/policies/reload")
-  Map reloadPolicies(@Body String requestBody)
-  
+@JsonRootName('applications')
+@EqualsAndHashCode
+class DiscoveryApplications {
+    @JsonProperty('application')
+    List<DiscoveryApplication> applications
 }

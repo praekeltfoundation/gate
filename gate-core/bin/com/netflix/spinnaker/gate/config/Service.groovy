@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Netflix, Inc.
+ * Copyright 2015 Netflix, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-package com.netflix.spinnaker.gate.services.internal
+package com.netflix.spinnaker.gate.config
 
-import retrofit.client.Response
-import retrofit.http.Body
-import retrofit.http.Headers
-import retrofit.http.POST
+import groovy.transform.CompileStatic
 
-interface GatekeeperService {
+@CompileStatic
+class Service {
+  boolean enabled = true
+  String vipAddress
+  String baseUrl
 
-  @Headers("Accept: application/json")
-  @POST("/policies/reload")
-  Map reloadPolicies(@Body String requestBody)
-  
+  Map<String, Object> config = [:]
+
+  void setBaseUrl(String baseUrl) {
+    this.baseUrl = baseUrl.endsWith("/") ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl
+  }
 }

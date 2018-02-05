@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Netflix, Inc.
+ * Copyright 2016 Netflix, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
+
 package com.netflix.spinnaker.gate.services.internal
 
-import retrofit.client.Response
-import retrofit.http.Body
+import retrofit.http.GET
 import retrofit.http.Headers
-import retrofit.http.POST
 
-interface GatekeeperService {
-
+interface HealthCheckableService {
   @Headers("Accept: application/json")
-  @POST("/policies/reload")
-  Map reloadPolicies(@Body String requestBody)
-  
+  @GET("/health")
+  Map health()
 }

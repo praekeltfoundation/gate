@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-package com.netflix.spinnaker.gate.services.internal
+package com.netflix.spinnaker.gate
 
-import retrofit.client.Response
-import retrofit.http.Body
-import retrofit.http.Headers
-import retrofit.http.POST
+import retrofit.http.*
 
-interface GatekeeperService {
+interface Api {
 
-  @Headers("Accept: application/json")
-  @POST("/policies/reload")
-  Map reloadPolicies(@Body String requestBody)
-  
+  @GET("/applications")
+  List getApplications()
+
+  @GET("/applications/{name}")
+  Map getApplication(@Path("name") String name)
+
+  @GET("/applications/{name}/tasks")
+  List getTasks(@Path("name") String name, @Query("limit") Integer limit, @Query("statuses") String statuses)
+
+  @POST("/applications/{name}/tasks")
+  Map createTask(@Path("name") String name, @Body Map body)
 }

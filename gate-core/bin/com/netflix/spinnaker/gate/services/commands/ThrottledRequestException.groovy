@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Netflix, Inc.
+ * Copyright 2015 Netflix, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package com.netflix.spinnaker.gate.services.internal
 
-import retrofit.client.Response
-import retrofit.http.Body
-import retrofit.http.Headers
-import retrofit.http.POST
+package com.netflix.spinnaker.gate.services.commands
 
-interface GatekeeperService {
+import groovy.transform.InheritConstructors
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.ResponseStatus
 
-  @Headers("Accept: application/json")
-  @POST("/policies/reload")
-  Map reloadPolicies(@Body String requestBody)
-  
+@ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+@InheritConstructors
+class ThrottledRequestException extends RuntimeException {
+
 }

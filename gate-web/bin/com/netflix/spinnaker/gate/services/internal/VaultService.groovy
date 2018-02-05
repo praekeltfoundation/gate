@@ -18,13 +18,29 @@ package com.netflix.spinnaker.gate.services.internal
 
 import retrofit.client.Response
 import retrofit.http.Body
+import retrofit.http.DELETE
+import retrofit.http.GET
 import retrofit.http.Headers
+import retrofit.http.Header
+import retrofit.http.PATCH
 import retrofit.http.POST
+import retrofit.http.PUT
+import retrofit.http.Path
+import retrofit.http.Query
 
-interface GatekeeperService {
 
-  @Headers("Accept: application/json")
-  @POST("/policies/reload")
-  Map reloadPolicies(@Body String requestBody)
-  
+interface VaultService {
+
+  @GET("/sys/acl/policies")
+  Map getVaultACLs(@Header("X-Vault-Token") String vaultToken)
+
+  @GET("/v1/{backend}/roles?list=true")
+  Map getRoles(@Path("backend") String backend, @Header("X-Vault-Token") String vaultToken)
+
+  @POST("/v1/secret/gatekeeper")
+  Map updateGatekeeperPolicies(@Header("X-Vault-Token") String vaultToken, @Body Map newPolicies)
+
+  @GET("/v1/secret/gatekeeper")
+  Map getGatekeeperPolicies(@Header("X-Vault-Token") String vaultToken)
+
 }

@@ -14,17 +14,24 @@
  * limitations under the License.
  */
 
-package com.netflix.spinnaker.gate.services.internal
 
-import retrofit.client.Response
-import retrofit.http.Body
-import retrofit.http.Headers
-import retrofit.http.POST
+package com.netflix.spinnaker.gate.model.discovery
 
-interface GatekeeperService {
+import com.fasterxml.jackson.annotation.JsonProperty
+import groovy.transform.EqualsAndHashCode
 
-  @Headers("Accept: application/json")
-  @POST("/policies/reload")
-  Map reloadPolicies(@Body String requestBody)
-  
+@EqualsAndHashCode
+class DataCenterMetadata {
+  @JsonProperty('availability-zone')
+  String availabilityZone
+
+  @JsonProperty('instance-id')
+  String instanceId
+
+  @JsonProperty('ami-id')
+  String amiId
+
+  @JsonProperty('instance-type')
+  String instanceType
 }
+

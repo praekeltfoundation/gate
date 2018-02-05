@@ -1,11 +1,11 @@
 /*
- * Copyright 2014 Netflix, Inc.
+ * Copyright 2015 Google, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,15 +16,20 @@
 
 package com.netflix.spinnaker.gate.services.internal
 
-import retrofit.client.Response
-import retrofit.http.Body
+import retrofit.http.GET
 import retrofit.http.Headers
-import retrofit.http.POST
+import retrofit.http.Path
 
-interface GatekeeperService {
+interface RoscoService {
+
+  @GET("/bakeOptions")
+  List bakeOptions()
+
+  @GET("/bakeOptions/{cloudProvider}")
+  Map bakeOptions(@Path("cloudProvider") String cloudProvider)
 
   @Headers("Accept: application/json")
-  @POST("/policies/reload")
-  Map reloadPolicies(@Body String requestBody)
-  
+  @GET("/api/v1/{region}/logs/{statusId}")
+  Map lookupLogs(@Path("region") String region, @Path("statusId") String statusId)
+
 }

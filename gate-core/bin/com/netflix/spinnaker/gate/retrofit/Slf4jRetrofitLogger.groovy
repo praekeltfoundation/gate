@@ -14,17 +14,25 @@
  * limitations under the License.
  */
 
-package com.netflix.spinnaker.gate.services.internal
+package com.netflix.spinnaker.gate.retrofit
 
-import retrofit.client.Response
-import retrofit.http.Body
-import retrofit.http.Headers
-import retrofit.http.POST
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import retrofit.RestAdapter
 
-interface GatekeeperService {
+class Slf4jRetrofitLogger implements RestAdapter.Log {
+    private final Logger logger
 
-  @Headers("Accept: application/json")
-  @POST("/policies/reload")
-  Map reloadPolicies(@Body String requestBody)
-  
+    public Slf4jRetrofitLogger(Class type) {
+        this(LoggerFactory.getLogger(type))
+    }
+
+    public Slf4jRetrofitLogger(Logger logger) {
+        this.logger = logger
+    }
+
+    @Override
+    void log(String message) {
+        logger.info(message)
+    }
 }

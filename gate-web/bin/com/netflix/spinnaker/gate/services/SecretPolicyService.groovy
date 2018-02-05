@@ -13,7 +13,7 @@ class SecretPolicyService {
   GatekeeperService gatekeeperService
 
   void reloadPolicies() {
-    gatekeeperService.reloadPolicies('')
+    gatekeeperService.reloadPolicies()
   }
 
 }
