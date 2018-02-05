@@ -6,6 +6,7 @@ build/
 out/
 /.idea/
 *.rdb
+gate-web/bin/
 
 .classpath
 .project
