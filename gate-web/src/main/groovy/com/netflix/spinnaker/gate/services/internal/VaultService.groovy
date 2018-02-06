@@ -38,7 +38,7 @@ interface VaultService {
   Map getRoles(@Path("backend") String backend, @Header("X-Vault-Token") String vaultToken)
 
   @POST("/v1/secret/gatekeeper")
-  Map updateGatekeeperPolicies(@Header("X-Vault-Token") String vaultToken, @Body Map newPolicies)
+  void updateGatekeeperPolicies(@Header("X-Vault-Token") String vaultToken, @Body Map newPolicies)
 
   @GET("/v1/secret/gatekeeper")
   Map getGatekeeperPolicies(@Header("X-Vault-Token") String vaultToken)

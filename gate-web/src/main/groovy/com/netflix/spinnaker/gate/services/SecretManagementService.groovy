@@ -23,8 +23,8 @@ class SecretManagementService {
     return vaultService.getRoles(backend, vaultToken)
   }
 
-  Map updateGatekeeperPolicies(String vaultToken, Map newPolicies) {
-    return vaultService.updateGatekeeperPolicies(vaultToken, newPolicies)
+  void updateGatekeeperPolicies(String vaultToken, Map newPolicies) {
+    vaultService.updateGatekeeperPolicies(vaultToken, newPolicies)
   }
 
   Map getGatekeeperPolicies(String vaultToken) {
