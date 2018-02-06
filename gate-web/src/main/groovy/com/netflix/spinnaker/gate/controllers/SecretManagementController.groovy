@@ -16,6 +16,7 @@
 
 package com.netflix.spinnaker.gate.controllers
 
+import retrofit.client.Response
 import com.netflix.spinnaker.gate.services.SecretManagementService
 import com.netflix.spinnaker.gate.services.SecretPolicyService
 import io.swagger.annotations.ApiOperation
