@@ -12,8 +12,8 @@ class SecretPolicyService {
   @Autowired
   GatekeeperService gatekeeperService
 
-  void reloadPolicies() {
-    gatekeeperService.reloadPolicies('')
+  Map reloadPolicies() {
+    return gatekeeperService.reloadPolicies('')
   }
 
 }

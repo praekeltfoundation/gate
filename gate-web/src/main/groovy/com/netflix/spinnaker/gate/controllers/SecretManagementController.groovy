@@ -54,7 +54,7 @@ class SecretManagementController {
   @ApiOperation(value = "Retrieve a list Vault ACLs for Spinnaker applications")
   @RequestMapping(value = "/vaultpolicies", method = RequestMethod.GET)
   Map getVaultACLs() {
-    secretManagementService.getVaultACLs(vaultToken)
+    return secretManagementService.getVaultACLs(vaultToken)
   }
 
   @ApiOperation(value = "Retrieve a list of roles for a secret backend")

@@ -16,18 +16,18 @@ class SecretManagementService {
   VaultService vaultService
 
   Map getVaultACLs(String vaultToken) {
-    vaultService.getVaultACLs(vaultToken)
+    return vaultService.getVaultACLs(vaultToken)
   }
 
   Map getRoles(String backend, String vaultToken) {
-    vaultService.getRoles(backend, vaultToken)
+    return vaultService.getRoles(backend, vaultToken)
   }
 
-  void updateGatekeeperPolicies(String vaultToken, Map newPolicies) {
-    vaultService.updateGatekeeperPolicies(vaultToken, newPolicies)
+  Map updateGatekeeperPolicies(String vaultToken, Map newPolicies) {
+    return vaultService.updateGatekeeperPolicies(vaultToken, newPolicies)
   }
 
   Map getGatekeeperPolicies(String vaultToken) {
-    vaultService.getGatekeeperPolicies(vaultToken)
+    return vaultService.getGatekeeperPolicies(vaultToken)
   }
 }
