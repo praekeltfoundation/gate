@@ -79,7 +79,7 @@ class SecretManagementController {
 
   @ApiOperation(value = "Update Gatekeeper policies")
   @RequestMapping(value = "/gatekeeper/policies", method = RequestMethod.POST)
-  Map updateGatekeeperPolicies(@RequestBody Map newPolicies) {
+  void updateGatekeeperPolicies(@RequestBody Map newPolicies) {
     try {
       secretManagementService.updateGatekeeperPolicies(vaultToken, newPolicies)
     } catch (RetrofitError e) {
